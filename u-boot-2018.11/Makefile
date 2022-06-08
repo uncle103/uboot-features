@@ -1834,6 +1834,13 @@ quiet_cmd_rmdirs = $(if $(wildcard $(rm-dirs)),CLEAN   $(wildcard $(rm-dirs)))
 quiet_cmd_rmfiles = $(if $(wildcard $(rm-files)),CLEAN   $(wildcard $(rm-files)))
       cmd_rmfiles = rm -f $(rm-files)
 
+quiet_cmd_mycmd = DISPLAY  $@
+      cmd_mycmd = touch tmpfile && rm tmpfile
+
+u-boot-mycmd: 
+        $(call if_changed,mycmd)
+
+
 # read all saved command lines
 
 targets := $(wildcard $(sort $(targets)))
