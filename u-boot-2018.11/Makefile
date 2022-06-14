@@ -550,6 +550,8 @@ autoconf_is_old := $(shell find . -path ./$(KCONFIG_CONFIG) -newer \
 						include/config/auto.conf)
 ifeq ($(autoconf_is_old),)
 include config.mk
+#$export ARCH=arm
+#This is where $(ARCH) works: select the Makefile
 include arch/$(ARCH)/Makefile
 endif
 endif

@@ -249,6 +249,7 @@ config CPU_SA1100
 	select SYS_CACHE_SHIFT_5
 	imply SYS_ARM_MMU
 
+# SYS_CPU is defined here
 config SYS_CPU
 	default "arm720t" if CPU_ARM720T
 	default "arm920t" if CPU_ARM920T
@@ -546,6 +547,7 @@ config ARCH_BCMSTB
 	  This enables support for Broadcom ARM-based set-top box
 	  chipsets, including the 7445 family of chips.
 
+# TARGET_VEXPRESS_CA5X2 is defined here
 config TARGET_VEXPRESS_CA5X2
 	bool "Support vexpress_ca5x2"
 	select CPU_V7A

@@ -21,7 +21,10 @@ VENDOR :=
 #########################################################################
 
 ARCH := $(CONFIG_SYS_ARCH:"%"=%)
+
+# CPU is defined here
 CPU := $(CONFIG_SYS_CPU:"%"=%)
+
 ifdef CONFIG_SPL_BUILD
 ifdef CONFIG_TEGRA
 CPU := arm720t

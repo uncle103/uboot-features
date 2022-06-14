@@ -89,6 +89,7 @@ PLATFORM_CPPFLAGS += $(patsubst %,-I$(srctree)/%include,$(machdirs))
 
 libs-y += $(machdirs)
 
+# startup file for  vexpress_ca9x4 board
 head-y := arch/arm/cpu/$(CPU)/start.o
 
 ifeq ($(CONFIG_SPL_BUILD),y)
