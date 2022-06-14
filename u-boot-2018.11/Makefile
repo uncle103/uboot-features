@@ -1840,7 +1840,7 @@ quiet_cmd_mycmd = DISPLAY  $@
       cmd_mycmd = touch tmpfile && rm tmpfile
 
 u-boot-mycmd: 
-        $(call if_changed,mycmd)
+	$(call if_changed,mycmd)
 
 
 # read all saved command lines
