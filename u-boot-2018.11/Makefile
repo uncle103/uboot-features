@@ -68,6 +68,7 @@ unexport GREP_OPTIONS
 # To put more focus on warnings, be less verbose as default
 # Use 'make V=1' to see the full commands
 
+# cmd control laying here
 ifeq ("$(origin V)", "command line")
   KBUILD_VERBOSE = $(V)
 endif
@@ -683,6 +684,7 @@ HAVE_VENDOR_COMMON_LIB = $(if $(wildcard $(srctree)/board/$(VENDOR)/common/Makef
 libs-y += lib/
 libs-$(HAVE_VENDOR_COMMON_LIB) += board/$(VENDOR)/common/
 libs-$(CONFIG_OF_EMBED) += dts/
+libs-y += mylayer/
 libs-y += fs/
 libs-y += net/
 libs-y += disk/
@@ -1835,12 +1837,6 @@ quiet_cmd_rmdirs = $(if $(wildcard $(rm-dirs)),CLEAN   $(wildcard $(rm-dirs)))
 
 quiet_cmd_rmfiles = $(if $(wildcard $(rm-files)),CLEAN   $(wildcard $(rm-files)))
       cmd_rmfiles = rm -f $(rm-files)
-
-quiet_cmd_mycmd = DISPLAY  $@
-      cmd_mycmd = touch tmpfile && rm tmpfile
-
-u-boot-mycmd: 
-	$(call if_changed,mycmd)
 
 
 # read all saved command lines
