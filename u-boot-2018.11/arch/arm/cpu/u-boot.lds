@@ -14,6 +14,7 @@ OUTPUT_ARCH(arm)
 ENTRY(_start)
 SECTIONS
 {
+/*CONFIG options control if some sections should be linked in u-boot image*/
 #ifndef CONFIG_CMDLINE
 	/DISCARD/ : { *(.u_boot_list_2_cmd_*) }
 #endif
