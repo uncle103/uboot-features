@@ -14,6 +14,7 @@ prefix := .
 endif
 endif
 
+# short declaration for __build , it is default target for Makefile.build
 PHONY := __build
 __build:
 
@@ -111,6 +112,7 @@ modorder-target := $(obj)/modules.order
 
 # We keep a list of all modules in $(MODVERDIR)
 
+# Where __build is defined!
 __build: $(if $(KBUILD_BUILTIN),$(builtin-target) $(lib-target) $(extra-y)) \
 	 $(if $(KBUILD_MODULES),$(obj-m) $(modorder-target)) \
 	 $(subdir-ym) $(always)

@@ -8,6 +8,13 @@ quiet_cmd_mycmd = DISPLAY  $@
 $(obj)/u-boot-mycmd: 
 	$(call if_changed,mycmd)
 
+#similar to extra-y,also use always
+always += command_X
+$(obj)/command_X:
+	echo "Building command_X"
+
+#extra-y is not linked to u-boot
 extra-y += u-boot-mycmd
 
+#obj-y will be linked to u-boot
 obj-y += hello.o
