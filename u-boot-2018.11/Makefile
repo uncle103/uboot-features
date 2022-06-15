@@ -340,6 +340,7 @@ include scripts/Kbuild.include
 
 # Make variables (CC, etc...)
 
+# compile chain is defined here, CROSS_COMPILE is used here
 AS		= $(CROSS_COMPILE)as
 # Always use GNU ld
 ifneq ($(shell $(CROSS_COMPILE)ld.bfd -v 2> /dev/null),)
@@ -384,6 +385,7 @@ KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
 UBOOTRELEASE = $(shell cat include/config/uboot.release 2> /dev/null)
 UBOOTVERSION = $(VERSION)$(if $(PATCHLEVEL),.$(PATCHLEVEL)$(if $(SUBLEVEL),.$(SUBLEVEL)))$(EXTRAVERSION)
 
+# env exported , so all sub makefiles could see them
 export VERSION PATCHLEVEL SUBLEVEL UBOOTRELEASE UBOOTVERSION
 export ARCH CPU BOARD VENDOR SOC CPUDIR BOARDDIR
 export CONFIG_SHELL HOSTCC HOSTCFLAGS HOSTLDFLAGS CROSS_COMPILE AS LD CC
@@ -674,6 +676,7 @@ CHECKFLAGS     += $(NOSTDINC_FLAGS)
 # FIX ME
 cpp_flags := $(KBUILD_CPPFLAGS) $(PLATFORM_CPPFLAGS) $(UBOOTINCLUDE) \
 							$(NOSTDINC_FLAGS)
+# C compiler flags is defined here
 c_flags := $(KBUILD_CFLAGS) $(cpp_flags)
 
 #########################################################################
@@ -1791,12 +1794,16 @@ else
         target-dir = $(if $(KBUILD_EXTMOD),$(dir $<),$(dir $@))
 endif
 
+# rules to build single target is defined here
 %.s: %.c prepare scripts FORCE
 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
 %.i: %.c prepare scripts FORCE
 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
+
+# rule/downstream to build object file. $(Q)$(MAKE) $(build)=$(build-dir) /dir_chain/object.o
 %.o: %.c prepare scripts FORCE
 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
+
 %.lst: %.c prepare scripts FORCE
 	$(Q)$(MAKE) $(build)=$(build-dir) $(target-dir)$(notdir $@)
 %.s: %.S prepare scripts FORCE
