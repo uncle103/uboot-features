@@ -11,10 +11,12 @@ $(obj)/u-boot-mycmd:
 #similar to extra-y,also use always
 always += command_X
 $(obj)/command_X:
-	echo "Building command_X"
+	@echo "Building command_X"
 
 #extra-y is not linked to u-boot
 extra-y += u-boot-mycmd
 
-#obj-y will be linked to u-boot
+#hello.o will be linked to $(obj)/built-in.o
 obj-y += hello.o
+#x_dir/built-in.o will be linked to $(obj)/built-in.o
+obj-y += x_dir/
