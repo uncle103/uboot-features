@@ -931,6 +931,7 @@ endif
 	@# options are whitelisted, so new ones should not be added.
 	$(call cmd,cfgcheck,u-boot.cfg)
 
+# target to build dtb
 PHONY += dtbs
 dtbs: dts/dt.dtb
 	@:
@@ -939,7 +940,7 @@ dts/dt.dtb: u-boot
 
 quiet_cmd_copy = COPY    $@
       cmd_copy = cp $< $@
-
+# CONFIG_MULTI_DTB_FIT
 ifeq ($(CONFIG_MULTI_DTB_FIT),y)
 
 fit-dtb.blob: dts/dt.dtb FORCE
@@ -954,6 +955,7 @@ u-boot-fit-dtb.bin: u-boot-nodtb.bin fit-dtb.blob
 
 u-boot.bin: u-boot-fit-dtb.bin FORCE
 	$(call if_changed,copy)
+# CONFIG_OF_SEPARATE
 else ifeq ($(CONFIG_OF_SEPARATE),y)
 u-boot-dtb.bin: u-boot-nodtb.bin dts/dt.dtb FORCE
 	$(call if_changed,cat)
@@ -961,6 +963,7 @@ u-boot-dtb.bin: u-boot-nodtb.bin dts/dt.dtb FORCE
 u-boot.bin: u-boot-dtb.bin FORCE
 	$(call if_changed,copy)
 else
+# default no dtb to build
 u-boot.bin: u-boot-nodtb.bin FORCE
 	$(call if_changed,copy)
 endif
